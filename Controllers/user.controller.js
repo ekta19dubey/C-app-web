@@ -150,6 +150,8 @@ controller.device_list = async (req, res) => {
         let result = await User.device_list();
         console.log(result)
         if (result) {
+            console.log('ok')
+
             res.send(getSuccessObject(result));
 
         } else {
@@ -166,12 +168,21 @@ controller.device_list = async (req, res) => {
 }
 
 controller.contact_list = async (req, res) => {
-    console.log(req.body.device_id)
+    console.log(req.body)
+
+    const data = {
+        device_id: req.body.device_id,
+        limit: req.body.limit,
+        offset: req.body.offset
+    }
     try {
-        let result = await User.contact_list(req.body.device_id);
-        // console.log("ekta==>" + JSON.stringify(result))
+        let result = await User.contact_list(data);
+        let totalCount = await User.total_contacts(data);
+        //  console.log("" + totalCount[0].count)
+        let count = totalCount[0].count - data.offset;
+        console.log("ekta==>" + count + totalCount[0].count)
         if (result) {
-            res.send(getSuccessObject(result));
+            res.send(getSuccessObject({ "total_count": count, result }));
 
         } else {
 
@@ -188,7 +199,7 @@ controller.contact_list = async (req, res) => {
 }
 
 controller.call_details = async (req, res) => {
-    console.log(req.body.device_id)
+    console.log(req.body)
     try {
         let result = await User.call_details(req.body.device_id);
         // console.log("ekta==>" + JSON.stringify(result))

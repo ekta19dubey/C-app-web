@@ -61,11 +61,45 @@ userModel.device_list = async (email) => {
 
 
 userModel.contact_list = async (data) => {
-    let contactListSql = "SELECT * FROM contact_details WHERE device_id = ?"
+    let contactListSql = `SELECT * FROM contact_details WHERE device_id= '${data.device_id}' ORDER BY contact_id LIMIT ${data.limit} OFFSET ${data.offset} `
+
+    // SELECT * FROM `contact_details` WHERE `device_id` = 3
     const connection = await database;
     return new Promise((resolve, reject) => {
 
-        connection.query(contactListSql, [data], (err, result) => {
+        connection.query(contactListSql, [data.device_id, data.limit, data.offset], (err, result) => {
+
+            if (err) {
+                console.log(err)
+                // connection.release();
+                // return reject(err);
+            }
+
+            if (result) {
+                console.log("if resulttttttt", result)
+                return resolve(result)
+
+            } else {
+                console.log("else resulttttttt", result)
+                return reject(result)
+            }
+
+
+
+        });
+
+
+    })
+}
+
+userModel.total_contacts = async (data) => {
+    let countcontectsSql = `SELECT COUNT(*)  AS count FROM contact_details`
+
+    // SELECT * FROM `contact_details` WHERE `device_id` = 3
+    const connection = await database;
+    return new Promise((resolve, reject) => {
+
+        connection.query(countcontectsSql, (err, result) => {
 
             if (err) {
                 console.log(err)
