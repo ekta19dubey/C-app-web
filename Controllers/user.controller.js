@@ -177,7 +177,7 @@ controller.contact_list = async (req, res) => {
     }
     try {
         let result = await User.contact_list(data);
-        let totalCount = await User.total_contacts(data);
+        let totalCount = await User.total_count('contact_details');
         //  console.log("" + totalCount[0].count)
         let count = totalCount[0].count - data.offset;
         console.log("ekta==>" + count + totalCount[0].count)
@@ -200,11 +200,20 @@ controller.contact_list = async (req, res) => {
 
 controller.call_details = async (req, res) => {
     console.log(req.body)
+    //console.log(req.body)
+
+    const data = {
+        device_id: req.body.device_id,
+        limit: req.body.limit,
+        offset: req.body.offset
+    }
     try {
-        let result = await User.call_details(req.body.device_id);
+        let result = await User.call_details(data);
+        let totalCount = await User.total_count('call_details');
         // console.log("ekta==>" + JSON.stringify(result))
+        let count = totalCount[0].count - data.offset;
         if (result) {
-            res.send(getSuccessObject(result));
+            res.send(getSuccessObject({ "total_count": count, result }));
 
         } else {
 

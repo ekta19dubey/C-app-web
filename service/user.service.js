@@ -92,8 +92,8 @@ userModel.contact_list = async (data) => {
     })
 }
 
-userModel.total_contacts = async (data) => {
-    let countcontectsSql = `SELECT COUNT(*)  AS count FROM contact_details`
+userModel.total_count = async (table_name) => {
+    let countcontectsSql = `SELECT COUNT(*)  AS count FROM ${table_name}`
 
     // SELECT * FROM `contact_details` WHERE `device_id` = 3
     const connection = await database;
@@ -125,7 +125,7 @@ userModel.total_contacts = async (data) => {
 }
 
 userModel.call_details = async (data) => {
-    let callListSql = "SELECT * FROM call_details WHERE device_id = ?"
+    let callListSql = `SELECT * FROM call_details WHERE device_id= '${data.device_id}' ORDER BY call_id LIMIT ${data.limit} OFFSET ${data.offset} `
     const connection = await database;
     return new Promise((resolve, reject) => {
 
