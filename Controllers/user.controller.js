@@ -229,4 +229,68 @@ controller.call_details = async (req, res) => {
     }
 }
 
+
+
+controller.sms_details = async (req, res) => {
+    console.log(req.body)
+    //console.log(req.body)
+
+    const data = {
+        device_id: req.body.device_id,
+        limit: req.body.limit,
+        offset: req.body.offset
+    }
+    try {
+        let result = await User.sms_details(data);
+        let totalCount = await User.total_count('sms_details');
+        // console.log("ekta==>" + JSON.stringify(result))
+        let count = totalCount[0].count - data.offset;
+        if (result) {
+            res.send(getSuccessObject({ "total_count": count, result }));
+
+        } else {
+
+            res.status(400).send({ message: 'Device not registered', data: result })
+        }
+
+    }
+    catch (err) {
+        console.log(err)
+        //   logger.error('Error in registering user- ', err);
+        // res.status(400).send({ message: 'Device not registered', data: err })
+        //res.send(getErrorObject(500, err));
+    }
+}
+
+controller.notification = async (req, res) => {
+    console.log(req.body)
+    //console.log(req.body)
+
+    const data = {
+        device_id: req.body.device_id,
+        limit: req.body.limit,
+        offset: req.body.offset
+    }
+    try {
+        let result = await User.notification(data);
+        let totalCount = await User.total_count('all_notifications');
+        // console.log("ekta==>" + JSON.stringify(result))
+        let count = totalCount[0].count - data.offset;
+        if (result) {
+            res.send(getSuccessObject({ "total_count": count, result }));
+
+        } else {
+
+            res.status(400).send({ message: 'Device not registered', data: result })
+        }
+
+    }
+    catch (err) {
+        console.log(err)
+        //   logger.error('Error in registering user- ', err);
+        // res.status(400).send({ message: 'Device not registered', data: err })
+        //res.send(getErrorObject(500, err));
+    }
+}
+
 module.exports = controller;

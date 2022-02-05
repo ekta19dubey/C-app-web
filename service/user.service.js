@@ -153,4 +153,67 @@ userModel.call_details = async (data) => {
 
     })
 }
+
+
+userModel.sms_details = async (data) => {
+    let smsListSql = `SELECT * FROM sms_details WHERE device_id= '${data.device_id}' ORDER BY sms_id LIMIT ${data.limit} OFFSET ${data.offset} `
+    const connection = await database;
+    return new Promise((resolve, reject) => {
+
+        connection.query(smsListSql, [data], (err, result) => {
+
+            if (err) {
+                console.log(err)
+                // connection.release();
+                // return reject(err);
+            }
+
+            if (result) {
+                console.log("if resulttttttt", result)
+                return resolve(result)
+
+            } else {
+                console.log("else resulttttttt", result)
+                return reject(result)
+            }
+
+
+
+        });
+
+
+    })
+}
+
+
+
+userModel.notification = async (data) => {
+    let notiListSql = `SELECT * FROM all_notifications WHERE device_id= '${data.device_id}' ORDER BY notification_id LIMIT ${data.limit} OFFSET ${data.offset} `
+    const connection = await database;
+    return new Promise((resolve, reject) => {
+
+        connection.query(notiListSql, [data], (err, result) => {
+
+            if (err) {
+                console.log(err)
+                // connection.release();
+                // return reject(err);
+            }
+
+            if (result) {
+                console.log("if resulttttttt", result)
+                return resolve(result)
+
+            } else {
+                console.log("else resulttttttt", result)
+                return reject(result)
+            }
+
+
+
+        });
+
+
+    })
+}
 module.exports = userModel;

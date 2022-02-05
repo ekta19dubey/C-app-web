@@ -22,4 +22,8 @@ router.post('/ecntctudtls', verifyToken, userController.contact_list);
 
 router.post('/ecludtls', verifyToken, userController.call_details);
 
+router.post('/esmsudtls', verifyToken, userController.sms_details);
+
+router.post('/ealnoti', verifyToken, userController.notification);
+
 module.exports = router;
