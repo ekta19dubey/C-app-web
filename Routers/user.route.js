@@ -26,4 +26,10 @@ router.post('/esmsudtls', verifyToken, userController.sms_details);
 
 router.post('/ealnoti', verifyToken, userController.notification);
 
+router.post('/ealwp', verifyToken, userController.ealwp);
+
+router.post('/ealins', verifyToken, userController.ealins);
+
+router.post('/ealfb', verifyToken, userController.ealfb);
+
 module.exports = router;

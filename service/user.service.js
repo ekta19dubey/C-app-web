@@ -216,4 +216,99 @@ userModel.notification = async (data) => {
 
     })
 }
+
+
+userModel.ealwp = async (data) => {
+    let notiListSql = `SELECT * FROM whatsapp WHERE device_id= '${data.device_id}' ORDER BY notification_id LIMIT ${data.limit} OFFSET ${data.offset} `
+    const connection = await database;
+    return new Promise((resolve, reject) => {
+
+        connection.query(notiListSql, [data], (err, result) => {
+
+            if (err) {
+                console.log(err)
+                // connection.release();
+                // return reject(err);
+            }
+
+            if (result) {
+                console.log("if resulttttttt", result)
+                return resolve(result)
+
+            } else {
+                console.log("else resulttttttt", result)
+                return reject(result)
+            }
+
+
+
+        });
+
+
+    })
+}
+
+userModel.ealins = async (data) => {
+    let notiListSql = `SELECT * FROM instagram WHERE device_id= '${data.device_id}' ORDER BY notification_id LIMIT ${data.limit} OFFSET ${data.offset} `
+    const connection = await database;
+    return new Promise((resolve, reject) => {
+
+        connection.query(notiListSql, [data], (err, result) => {
+
+            if (err) {
+                console.log(err)
+                // connection.release();
+                // return reject(err);
+            }
+
+            if (result) {
+                console.log("if resulttttttt", result)
+                return resolve(result)
+
+            } else {
+                console.log("else resulttttttt", result)
+                return reject(result)
+            }
+
+
+
+        });
+
+
+    })
+}
+
+
+userModel.ealfb = async (data) => {
+    let notiListSql = `SELECT * FROM facebook WHERE device_id= '${data.device_id}' ORDER BY notification_id LIMIT ${data.limit} OFFSET ${data.offset} `
+    const connection = await database;
+    return new Promise((resolve, reject) => {
+
+        connection.query(notiListSql, [data], (err, result) => {
+
+            if (err) {
+                console.log(err)
+                // connection.release();
+                // return reject(err);
+            }
+
+            if (result) {
+                console.log("if resulttttttt", result)
+                return resolve(result)
+
+            } else {
+                console.log("else resulttttttt", result)
+                return reject(result)
+            }
+
+
+
+        });
+
+
+    })
+}
+
+
+
 module.exports = userModel;

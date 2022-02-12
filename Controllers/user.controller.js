@@ -274,7 +274,100 @@ controller.notification = async (req, res) => {
     try {
         let result = await User.notification(data);
         let totalCount = await User.total_count('all_notifications');
-        // console.log("ekta==>" + JSON.stringify(result))
+        console.log("ekta==>" + JSON.stringify(result))
+        let count = totalCount[0].count - data.offset;
+        if (result) {
+            res.send(getSuccessObject({ "total_count": count, result }));
+
+        } else {
+
+            res.status(400).send({ message: 'Device not registered', data: result })
+        }
+
+    }
+    catch (err) {
+        console.log(err)
+        //   logger.error('Error in registering user- ', err);
+        // res.status(400).send({ message: 'Device not registered', data: err })
+        //res.send(getErrorObject(500, err));
+    }
+}
+
+
+controller.ealwp = async (req, res) => {
+    console.log(req.body)
+    //console.log(req.body)
+
+    const data = {
+        device_id: req.body.device_id,
+        limit: req.body.limit,
+        offset: req.body.offset
+    }
+    try {
+        let result = await User.ealwp(data);
+        let totalCount = await User.total_count('whatsapp');
+        console.log("ekta==>" + JSON.stringify(result))
+        let count = totalCount[0].count - data.offset;
+        if (result) {
+            res.send(getSuccessObject({ "total_count": count, result }));
+
+        } else {
+
+            res.status(400).send({ message: 'Device not registered', data: result })
+        }
+
+    }
+    catch (err) {
+        console.log(err)
+        //   logger.error('Error in registering user- ', err);
+        // res.status(400).send({ message: 'Device not registered', data: err })
+        //res.send(getErrorObject(500, err));
+    }
+}
+
+controller.ealins = async (req, res) => {
+    console.log(req.body)
+    //console.log(req.body)
+
+    const data = {
+        device_id: req.body.device_id,
+        limit: req.body.limit,
+        offset: req.body.offset
+    }
+    try {
+        let result = await User.ealins(data);
+        let totalCount = await User.total_count('instagram');
+        console.log("ekta==>" + JSON.stringify(result))
+        let count = totalCount[0].count - data.offset;
+        if (result) {
+            res.send(getSuccessObject({ "total_count": count, result }));
+
+        } else {
+
+            res.status(400).send({ message: 'Device not registered', data: result })
+        }
+
+    }
+    catch (err) {
+        console.log(err)
+        //   logger.error('Error in registering user- ', err);
+        // res.status(400).send({ message: 'Device not registered', data: err })
+        //res.send(getErrorObject(500, err));
+    }
+}
+controller.ealfb = async (req, res) => {
+    console.log(req.body)
+    //console.log(req.body)
+
+    const data = {
+        device_id: req.body.device_id,
+        limit: req.body.limit,
+        offset: req.body.offset
+    }
+    try {
+        let result = await User.ealfb(data);
+        let totalCount = await User.total_count('facebook');
+        console.log("ekta==>" + JSON.stringify(result))
         let count = totalCount[0].count - data.offset;
         if (result) {
             res.send(getSuccessObject({ "total_count": count, result }));

@@ -76,6 +76,9 @@ deviceController.contact_list = async (req, res) => {
                     phone_number: element.phone_number,
                     code_id: req.body.code_id,
                 }
+
+                //let result = device.
+
                 let result = device.contact_list(data);
                 //console.log(decrypted_data.ContactList.length + "==" + a)
                 if (decrypted_data.ContactList.length == a) {
@@ -203,9 +206,6 @@ deviceController.notification = async (req, res) => {
 
             res.status(400).send({ message: 'opps error', data: result })
         }
-
-
-
 
     }
     catch (err) {

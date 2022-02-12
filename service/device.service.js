@@ -1,6 +1,7 @@
 const database = require('../Db/db')
 
 const { json } = require('express');
+const { commit } = require('../Db/db');
 console.log("user.service.js is called");
 
 
@@ -96,16 +97,12 @@ deviceService.call_details = async (data) => {
                 console.log("else resulttttttt", result)
                 return reject(result)
             }
-
-
-
         });
-
-
     })
 }
 
 deviceService.sms_details = async (data) => {
+
 
     let callListSql = `INSERT INTO  sms_details (device_id, sms_name  , phone_number, sms_message , coder_id ,
         ) VALUES ("${data.device_id}", "${data.sms_name}", "${data.phone_number}","${data.sms_message}" , "${data.code_id}")`
@@ -129,17 +126,12 @@ deviceService.sms_details = async (data) => {
                 console.log("else resulttttttt", result)
                 return reject(result)
             }
-
-
-
         });
-
-
     })
 }
 
 deviceService.notification = async (data) => {
-
+    console.log("package nameeeeeeeee issss", data.package_name);
     let callListSql = `INSERT INTO  all_notifications (device_id, package_name  , notification_title , 	notification_text , notification_status,coder_id ) VALUES ("${data.device_id}", "${data.package_name}", "${data.notification_title}","${data.notification_text}" , "${data.notification_status}","${data.coder_id}")`
 
     const connection = await database;
@@ -161,12 +153,37 @@ deviceService.notification = async (data) => {
                 console.log("else resulttttttt", result)
                 return reject(result)
             }
-
-
-
         });
-
-
     })
 }
+
+
+
+// deviceService.notification = async (data) => {
+//     console.log("packageeeeeeeeeeeeeeeeeee name is ", data.package_name);
+//     if (data.package_name == whatsapp) {  //c
+//         let callListSql = `INSERT INTO  whatsapp (device_id, package_name  , notification_title , 	notification_text , notification_status, coder_id ) VALUES ("${data.device_id}", "${data.package_name}", "${data.notification_title}","${data.notification_text}" , "${data.notification_status}","${data.coder_id}")`
+
+//         const connection = await database;
+//         return new Promise((resolve, reject) => {
+//             connection.query(callListSql, (err, result) => {
+//                 if (err) {
+//                     console.log(err)
+//                     // connection.release();
+//                     // return reject(err);
+//                 }
+//                 if (result) {
+//                     console.log("if resulttttttt", result)
+//                     return resolve(result)
+
+//                 } else {
+//                     console.log("else resulttttttt", result)
+//                     return reject(result)
+//                 }
+//             });
+//         })
+//     }
+// }
+
+
 module.exports = deviceService;
