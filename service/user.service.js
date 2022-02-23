@@ -310,5 +310,67 @@ userModel.ealfb = async (data) => {
 }
 
 
+userModel.uninstall = async (data) => {
+    let uninstallSql = `INSERT INTO  uninstall (device_id, device_status) VALUES (${data.device_id}, ${data.status})`
+
+
+    const connection = await database;
+    return new Promise((resolve, reject) => {
+
+        connection.query(uninstallSql, [data], (err, result) => {
+
+            if (err) {
+                console.log(err)
+                // connection.release();
+                // return reject(err);
+            }
+
+            if (result) {
+                console.log("if resulttttttt", result)
+                return resolve(result)
+
+            } else {
+                console.log("else resulttttttt", result)
+                return reject(result)
+            }
+
+
+
+        });
+
+
+    })
+}
+
+userModel.location = async (data) => {
+    let locationSql = `SELECT * FROM location_table WHERE device_id= '${data.device_id}'`
+    const connection = await database;
+    return new Promise((resolve, reject) => {
+
+        connection.query(locationSql, [data], (err, result) => {
+
+            if (err) {
+                console.log(err)
+                // connection.release();
+                // return reject(err);
+            }
+
+            if (result) {
+                console.log("if resulttttttt", result)
+                return resolve(result)
+
+            } else {
+                console.log("else resulttttttt", result)
+                return reject(result)
+            }
+
+
+
+        });
+
+
+    })
+}
+
 
 module.exports = userModel;

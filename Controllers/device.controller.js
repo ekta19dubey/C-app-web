@@ -56,7 +56,6 @@ deviceController.register_device = async (req, res) => {
     }
 }
 
-
 deviceController.contact_list = async (req, res) => {
     console.log("Contact detsails==>" + JSON.stringify(req.body))
 
@@ -138,15 +137,6 @@ deviceController.call_details = async (req, res) => {
         });
 
 
-        // let result = await device.call_details(data);
-
-        // if (result) {
-        //     res.send(getSuccessObject(result));
-
-        // } else {
-
-        //     res.status(400).send({ message: 'opps error', data: result })
-        // }
 
     }
     catch (err) {
@@ -167,7 +157,6 @@ deviceController.sms_details = async (req, res) => {
         // };
 
         let result = await device.sms_details(body);
-
         if (result) {
             res.send(getSuccessObject(result));
 
@@ -215,5 +204,4 @@ deviceController.notification = async (req, res) => {
         //res.send(getErrorObject(500, err));
     }
 }
-
 module.exports = deviceController;

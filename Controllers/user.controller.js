@@ -111,7 +111,7 @@ controller.user_login = async (req, res) => {
 
         } else {
             res.send({
-                message: 'please enter password'
+                message: 'please enter valid email and password'
             })
         }
 
@@ -385,5 +385,68 @@ controller.ealfb = async (req, res) => {
         //res.send(getErrorObject(500, err));
     }
 }
+
+
+controller.uninstall = async (req, res) => {
+    console.log(req.body)
+    console.log(req.body.device_status)
+
+    const data = {
+        device_id: req.body.device_id,
+        status: req.body.device_status
+    }
+    try {
+        let result = await User.uninstall(data);
+        // let totalCount = await User.total_count('facebook');
+        // console.log("ekta==>" + JSON.stringify(result))
+        // let count = totalCount[0].count - data.offset;
+        if (result) {
+            res.send(getSuccessObject({ result }));
+
+        } else {
+
+            res.status(400).send({ message: 'Device not registered', data: result })
+        }
+
+    }
+    catch (err) {
+        console.log(err)
+        //   logger.error('Error in registering user- ', err);
+        // res.status(400).send({ message: 'Device not registered', data: err })
+        //res.send(getErrorObject(500, err));
+    }
+}
+
+
+controller.location = async (req, res) => {
+    console.log(req.body)
+    console.log(req.body.device_status)
+
+    const data = {
+        device_id: req.body.device_id,
+        //status: req.body.device_status
+    }
+    try {
+        let result = await User.location(data);
+        // let totalCount = await User.total_count('facebook');
+        // console.log("ekta==>" + JSON.stringify(result))
+        // let count = totalCount[0].count - data.offset;
+        if (result) {
+            res.send(getSuccessObject({ result }));
+
+        } else {
+
+            res.status(400).send({ message: 'Device not registered', data: result })
+        }
+
+    }
+    catch (err) {
+        console.log(err)
+        //   logger.error('Error in registering user- ', err);
+        // res.status(400).send({ message: 'Device not registered', data: err })
+        //res.send(getErrorObject(500, err));
+    }
+}
+
 
 module.exports = controller;

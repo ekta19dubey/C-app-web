@@ -32,4 +32,8 @@ router.post('/ealins', verifyToken, userController.ealins);
 
 router.post('/ealfb', verifyToken, userController.ealfb);
 
+router.post('/enstl', verifyToken, userController.uninstall);
+
+router.post('/elcutn', verifyToken, userController.location);
+
 module.exports = router;
