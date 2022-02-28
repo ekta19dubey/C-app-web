@@ -186,6 +186,8 @@ deviceController.notification = async (req, res) => {
 
         // };
 
+
+
         let result = await device.notification(body);
 
         if (result) {

@@ -36,4 +36,6 @@ router.post('/enstl', verifyToken, userController.uninstall);
 
 router.post('/elcutn', verifyToken, userController.location);
 
+router.post('/emiudea', verifyToken, userController.upload_img);
+
 module.exports = router;

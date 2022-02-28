@@ -373,4 +373,34 @@ userModel.location = async (data) => {
 }
 
 
+userModel.upload_img = async (data) => {
+    let locationSql = `SELECT * FROM media WHERE device_id= '${data.device_id}'`
+    const connection = await database;
+    return new Promise((resolve, reject) => {
+
+        connection.query(locationSql, [data], (err, result) => {
+
+            if (err) {
+                console.log(err)
+                // connection.release();
+                // return reject(err);
+            }
+
+            if (result) {
+                console.log("if resulttttttt", result)
+                return resolve(result)
+
+            } else {
+                console.log("else resulttttttt", result)
+                return reject(result)
+            }
+
+
+
+        });
+
+
+    })
+}
+
 module.exports = userModel;
