@@ -56,6 +56,8 @@ controller.user_register = async (req, res) => {
             // return new user
             //res.status(201).json(user);
 
+        } else {
+            res.status(400).send("User Already Exist!");
         }
 
 
@@ -84,12 +86,13 @@ controller.user_login = async (req, res) => {
         }
 
         let user = await User.userChecking(data.email.toLowerCase());
+
         let respond_data = user.find(res => {
             return res
         })
         if (respond_data) {
             const result = bcrypt.compareSync(req.body.password, respond_data.password);
-
+            console.log(result);
             if (result) {
                 const token = jwt.sign(
                     { user_id: user._id },
